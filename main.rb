@@ -12,12 +12,6 @@ class Quiz
         @data = data
     end
 
-    def create_quiz(data)
-        quiz_order = (0..46).to_a.shuffle.slice(0..@count-1)
-        @quiz_all = quiz_order.map{ |n| data[n] }
-        # puts @quiz_all
-    end
-
     def create_quiz_order
         @quiz_order = (0..46).to_a.shuffle.slice(0..@count-1)
     end
@@ -49,46 +43,27 @@ class Quiz
         
 end
 
-# モードの選択
-# （県名から県庁所在地あて、県庁所在地から県名あて）
-puts <<~TEXT
-    ######  都道府県クイズ　START！！  ######
-    クイズのモードは、２つあるよ。
-    1 : 都道府県名から県庁所在地を答える
-    2 : 県庁所在地から県名を答える
-    ####################################
-TEXT
+Message.start_message
 
-print "クイズのモードを選んで、入力してね。(1 or 2): "
-inputs_1 = gets.chomp.to_i
+Message.mode_promt_message
+QUIZ_MODE = gets.chomp.to_i
 
 # 入力内容のチェック
-if (1..2) === inputs_1
-    QUIZ_MODE = inputs_1
-else
+unless (1..2) === QUIZ_MODE
     Message.error_message
     exit
 end
 
 # クイズ数・地域別の選択
-puts <<~TEXT
-
-    クイズの数は１〜４７問の間で選べるよ！
-TEXT
-print "こたえるクイズ数を、入力してね。(1 〜 47): "
-inputs_2 = gets.chomp.to_i
+Message.count_promt_message
+QUIZ_COUNT = gets.chomp.to_i
 
 # 入力内容のチェック
-if (1..47) === inputs_2
-    QUIZ_COUNT = inputs_2
-else
+unless (1..47) === QUIZ_COUNT
     Message.error_message
     exit
 end
 
 quiz = Quiz.new(QUIZ_MODE, QUIZ_COUNT, pref_data)
-# quiz.create_quiz(pref_data)
-# quiz.question
-
-quiz_order = quiz.create_quiz_order
+quiz.create_quiz_order
 quiz.question
