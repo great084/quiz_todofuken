@@ -1,14 +1,6 @@
 require './prefecture'
+require './message'
 
-# エラーメッセージ[外出し予定]
-def error_message
-    puts <<~EOS
-
-        入力内容に誤りがあります。
-        クイズを終了します。（再度実行してください）
-
-    EOS
-end
 
 
 # クイズ出題＆回答
@@ -74,7 +66,7 @@ inputs_1 = gets.chomp.to_i
 if (1..2) === inputs_1
     QUIZ_MODE = inputs_1
 else
-    error_message
+    Message.error_message
     exit
 end
 
@@ -90,7 +82,7 @@ inputs_2 = gets.chomp.to_i
 if (1..47) === inputs_2
     QUIZ_COUNT = inputs_2
 else
-    error_message
+    Message.error_message
     exit
 end
 
