@@ -5,7 +5,7 @@ module Message
   # スタートメッセージ
   def start_message
     puts <<~TEXT
-    ######  都道府県クイズ　START！！  ######
+    ######  都道府県クイズ　スタート！！  ######
     クイズのモードは、２つあるよ。
     1 : 都道府県名から県庁所在地を答える
     2 : 県庁所在地から県名を答える
@@ -38,4 +38,18 @@ module Message
     EOS
   end
 
+  # 結果メッセージ
+  def result_message(all, correct)
+    puts <<~EOS
+        ######  都道府県クイズ　終了です！！  ######
+
+        おつかれさまでした。
+        結果は、
+        ・
+        ・
+        ・
+    EOS
+    puts "全 #{all} 問中、 #{correct} 問、正解でした！"
+    puts "####################################"
+  end
 end
